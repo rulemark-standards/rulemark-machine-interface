@@ -1,0 +1,29 @@
+{
+  "registry_meta": {
+    "schema_version": "1.0",
+    "name": "RuleMark Canonical Registry",
+    "updated_at_utc": "2026-01-12T19:00:00Z",
+    "maintainer": "RuleMark Architecture",
+    "total_standards": 1,
+    "total_frozen": 1
+  },
+  "standards": [
+    {
+      "id": "RM-S-DAO-001",
+      "type": "STANDARD",
+      "status": "FROZEN",
+      "version": "v1.0-F",
+      "title": "Compliant DAO Framework",
+      "locations": {
+        "human_view": "https://rulemark.org/standards/RM-S-DAO-001",
+        "machine_read": "https://raw.githubusercontent.com/YOUR_GITHUB_ORG/rulemark-machine-interface/main/machine/RM-S-DAO-001.json",
+        "canonical_file": "https://records.rulemark.org/standards/RM-S-DAO-001.pdf"
+      },
+      "verification": {
+        "hash_algo": "sha256",
+        "file_hash": "e987f1b72ce44ae76bcc4208424704f9911b775f2324323fa222b7746d7bbeb2",
+        "signature_ref": "https://records.rulemark.org/standards/RM-S-DAO-001.sig"
+      }
+    }
+  ]
+}
