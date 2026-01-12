@@ -1,0 +1,32 @@
+{
+  "canonical_id": "RM-S-DAO-001",
+  "version": "v1.0-F",
+  "intent": "Define non-discretionary governance boundaries for compliant DAOs.",
+  "core_principles": [
+    "Rule Supremacy: governance rules override human discretion",
+    "Transparency: structures must be publicly verifiable",
+    "Determinism: execution paths must be auditable",
+    "Immutability: upgrades require new canonical records"
+  ],
+  "constraints": {
+    "must_have": [
+      "Publicly documented governance structure",
+      "Cryptographic verification method",
+      "Frozen rule set prior to execution"
+    ],
+    "must_not_have": [
+      "Hidden discretionary override keys",
+      "Mutable history without versioning",
+      "Unilateral parameter changes"
+    ]
+  },
+  "applicability_tags": [
+    "on-chain-dao",
+    "off-chain-collective",
+    "hybrid-protocol",
+    "ai-governance"
+  ],
+  "related_standards": [],
+  "supersedes": null,
+  "superseded_by": null
+}
