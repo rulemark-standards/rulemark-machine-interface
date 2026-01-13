@@ -1,18 +1,26 @@
-# rulemark-machine-interface     
- ## RuleMark v2.0 — The Sovereign Settlement Layer
-
-RuleMark is not a signing tool. It is the settlement layer for digital truth.
-
-In an era of infinite AI generation, the only scarce asset is verifiable reality.
-RuleMark decouples trust from platforms and anchors it in cryptography.
-
-We define who signs.
-We define what is frozen.
-Once verified, the record is irreversible.
-
-A signature is not approval.
-It is asset finality.
-
-This turns data into machine-verifiable capital —
-consumable by humans, institutions, and AI agents alike.
-
+{
+  "canonical_id": "RM-P-AUTH-002",
+  "version": "v1.0",
+  "status": "PASS",
+  "type": "Authorization / Sovereign Signature",
+  "title": "Signature as Irreversible Responsibility Binding",
+  "content": {
+    "proposition": "A signature is not approval, but irreversible responsibility binding.",
+    "facts": [
+      "Traditional digital signatures are often treated as approvals without enforceable responsibility.",
+      "Most signing systems allow revocation, ambiguity, or delegated authority without accountability."
+    ],
+    "judgment": [
+      "The signer identity must be unique and verifiable.",
+      "The signature must be non-repudiable.",
+      "The signature result must be irreversible once verified.",
+      "The signed object enters a final frozen state."
+    ],
+    "ruling": "A signature represents permanent responsibility over the signed record."
+  },
+  "constraints": [
+    "Signatures without responsibility binding are invalid.",
+    "Revocable signatures have no settlement finality.",
+    "Automated systems may verify signatures but cannot replace authorization."
+  ]
+}

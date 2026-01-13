@@ -2,8 +2,6 @@ import os
 import sys
 import nacl.signing
 import nacl.encoding
-import nacl.exceptions
-
 def main():
     print("--- [Verifier] CI/CD Sovereignty Check ---")
 
