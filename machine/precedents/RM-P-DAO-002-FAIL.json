@@ -1,0 +1,10 @@
+{
+  "canonical_id": "RM-P-DAO-002-FAIL",
+  "status": "DRAFT",
+  "applied_standard": "RM-S-DAO-002",
+  "facts": {
+    "has_public_governance_docs": false
+  },
+  "decision": "FAIL",
+  "triggered_constraints": ["require_public_governance_docs"]
+}
