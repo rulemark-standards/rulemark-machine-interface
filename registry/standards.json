@@ -3,5 +3,11 @@
     "schema_version": "1.0",
     "authority": "sole_source_of_truth"
   },
-  "standards": []
+  "standards": [
+    {
+      "canonical_id": "RM-S-DAO-001",
+      "status": "DRAFT",
+      "path": "machine/RM-S-DAO-001.json"
+    }
+  ]
 }
