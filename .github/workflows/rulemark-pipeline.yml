@@ -1,35 +1,40 @@
-name: RuleMark Pipeline
+name: RuleMark Pipeline (RSSA)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  judge:
+  verify-sovereignty:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # 1️⃣ 必须 checkout（没有这个一切必死）
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          fetch-depth: 2
+          python-version: '3.11'
+          
+      - name: Install Crypto Libs
+        run: pip install pynacl
 
-      # 2️⃣ 冻结必须签名
-      - name: Block unauthorized freeze
+      - name: Verify Manifest Signature
+        env:
+          SIGNER_PUBLIC_KEY: ${{ secrets.SIGNER_PUBLIC_KEY }}
         run: |
-          if git diff HEAD~1 HEAD | grep '"status": "FROZEN"' ; then
-            git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
+          if [ -z "$SIGNER_PUBLIC_KEY" ]; then
+            echo "❌ CRITICAL: SIGNER_PUBLIC_KEY secret is missing!"
+            exit 1
           fi
 
-      # 3️⃣ registry 主权锁（registry 改动也必须签名）
-      - name: Protect registry single source
-        run: |
-          if git diff HEAD~1 HEAD --name-only | grep '^registry/' ; then
-            git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
+          if [ -f "registry/manifests/batch_manifest.sig" ]; then
+            echo "🔍 Signature found. Verifying Sovereignty..."
+            python tools/verify_manifest.py
+          else
+            echo "❌ No signature found. BREACH of protocol."
+            exit 1
           fi
-
-      # 4️⃣ 基础 sanity check（防空跑）
-      - name: Ensure registry exists
-        run: |
-          test -f registry/standards.json
