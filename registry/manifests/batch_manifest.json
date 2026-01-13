@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "type": "RULEMARK_BATCH_MANIFEST",
+    "version": "1.0",
+    "batch_id": "TEST-001",
+    "timestamp_utc": "2026-01-13T00:00:00Z",
+    "algo": "Ed25519"
+  },
+  "consensus_target": {
+    "merkle_root": "sha256:TEST_ROOT"
+  },
+  "items": [
+    {
+      "canonical_id": "RM-TEST-001",
+      "version": "v0.0-D",
+      "file_hash": "sha256:TEST_FILE_HASH",
+      "status": "PASS"
+    }
+  ]
+}
