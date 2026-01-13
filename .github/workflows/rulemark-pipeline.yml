@@ -13,11 +13,11 @@ on:
 
 jobs:
   lint:
-    name: RuleMark Lint (Machine Judge)
+    name: RuleMark Lint & Authority Gate
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -25,9 +25,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run RuleMark Lint
+      # === 机器法官：结构与机器原生性审查 ===
+      - name: Run RuleMark Lint (Machine Judge)
         run: |
           python tools/rulemark_lint.py \
             machine/**/*.json \
             registry/**/*.json
 
+      # === 主权之门：只有 SIGNATURE 才允许冻结 ===
+      - name: Block unauthorized freeze
+        run: |
+          if git diff HEAD~1 HEAD | grep '"status": "FROZEN"' ; then
+            echo "[AUTHORITY CHECK] FROZEN detected, checking SIGNATURE..."
+            git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
+          else
+            echo "[AUTHORITY CHECK] No freeze detected"
+          fi
