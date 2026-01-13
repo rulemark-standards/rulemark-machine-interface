@@ -1,1 +1,33 @@
+name: RuleMark Pipeline
+
+on:
+  push:
+    paths:
+      - "machine/**/*.json"
+      - "registry/**/*.json"
+      - "tools/**/*.py"
+  pull_request:
+    paths:
+      - "machine/**/*.json"
+      - "registry/**/*.json"
+
+jobs:
+  lint:
+    name: RuleMark Lint (Machine Judge)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run RuleMark Lint
+        run: |
+          python tools/rulemark_lint.py \
+            machine/**/*.json \
+            registry/**/*.json
 
