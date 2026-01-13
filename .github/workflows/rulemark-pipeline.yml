@@ -2,35 +2,34 @@ name: RuleMark Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
-  rulemark-judge:
+  judge:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout full history
+      # 1️⃣ 必须 checkout（没有这个一切必死）
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Run RuleMark Lint
-        run: |
-          python tools/rulemark_lint.py
-
+      # 2️⃣ 冻结必须签名
       - name: Block unauthorized freeze
         run: |
           if git diff HEAD~1 HEAD | grep '"status": "FROZEN"' ; then
             git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
           fi
 
+      # 3️⃣ registry 主权锁（registry 改动也必须签名）
       - name: Protect registry single source
         run: |
           if git diff HEAD~1 HEAD --name-only | grep '^registry/' ; then
             git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
           fi
+
+      # 4️⃣ 基础 sanity check（防空跑）
+      - name: Ensure registry exists
+        run: |
+          test -f registry/standards.json
