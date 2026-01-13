@@ -2,42 +2,35 @@ name: RuleMark Pipeline
 
 on:
   push:
-    paths:
-      - "machine/**/*.json"
-      - "registry/**/*.json"
-      - "tools/**/*.py"
-  pull_request:
-    paths:
-      - "machine/**/*.json"
-      - "registry/**/*.json"
+    branches: [ main ]
 
 jobs:
-  lint:
-    name: RuleMark Lint & Authority Gate
+  rulemark-judge:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout full history
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      # === 机器法官：结构与机器原生性审查 ===
-      - name: Run RuleMark Lint (Machine Judge)
+      - name: Run RuleMark Lint
         run: |
-          python tools/rulemark_lint.py \
-            machine/**/*.json \
-            registry/**/*.json
+          python tools/rulemark_lint.py
 
-      # === 主权之门：只有 SIGNATURE 才允许冻结 ===
       - name: Block unauthorized freeze
         run: |
           if git diff HEAD~1 HEAD | grep '"status": "FROZEN"' ; then
-            echo "[AUTHORITY CHECK] FROZEN detected, checking SIGNATURE..."
             git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
-          else
-            echo "[AUTHORITY CHECK] No freeze detected"
+          fi
+
+      - name: Protect registry single source
+        run: |
+          if git diff HEAD~1 HEAD --name-only | grep '^registry/' ; then
+            git log -1 --pretty=%B | grep "SIGNATURE:" || exit 1
           fi
