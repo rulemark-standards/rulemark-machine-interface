@@ -1,0 +1,12 @@
+{
+  "canonical_id": "RM-S-DAO-002",
+  "schema_version": "1.0.0",
+  "status": "DRAFT",
+  "scope": {
+    "applies_to": ["DAO"]
+  },
+  "constraints": {
+    "require_public_governance_docs": true,
+    "forbid_private_governance": true
+  }
+}
