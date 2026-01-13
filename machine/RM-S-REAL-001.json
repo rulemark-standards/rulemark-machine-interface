@@ -1,0 +1,9 @@
+{
+  "canonical_id": "RM-S-REAL-001",
+  "version": "1.0",
+  "status": "PASS",
+  "content": "RuleMark Sovereign Signature Test",
+  "constraints": {
+    "is_sovereign": true
+  }
+}

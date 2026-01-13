@@ -1,19 +1,15 @@
 {
   "meta": {
     "type": "RULEMARK_BATCH_MANIFEST",
-    "version": "1.0",
-    "batch_id": "TEST-001",
-    "timestamp_utc": "2026-01-13T00:00:00Z",
-    "algo": "Ed25519"
+    "batch_id": "AUTO-001"
   },
   "consensus_target": {
-    "merkle_root": "sha256:TEST_ROOT"
+    "merkle_root": "sha256:a5b307a219ef20dc7b8af43f1b8673e1a4d5da5208d289dee56bf997b5b64515"
   },
   "items": [
     {
-      "canonical_id": "RM-TEST-001",
-      "version": "v0.0-D",
-      "file_hash": "sha256:TEST_FILE_HASH",
+      "canonical_id": "RM-S-REAL-001",
+      "file_hash": "sha256:77a3e7b32e48f7a9a8441e0966cb1fecb82d841cc0c64da3ca1605b72e48957d",
       "status": "PASS"
     }
   ]
