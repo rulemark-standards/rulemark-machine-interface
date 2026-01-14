@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Canonical Record",
+  "type": "object",
+  "required": ["canonical_id", "version", "hash"],
+  "properties": {
+    "canonical_id": { "type": "string" },
+    "version": { "type": "string" },
+    "hash": { "type": "string" }
+  },
+  "additionalProperties": true
+}
