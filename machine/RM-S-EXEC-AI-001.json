@@ -1,0 +1,226 @@
+{
+  "canonical_id": "RM-S-EXEC-AI-001",
+  "identity": {
+    "canonical_id": "RM-S-EXEC-AI-001",
+    "type": "Standard",
+    "domain": "EXEC-AI",
+    "version": "v1.0-F",
+    "status": "FROZEN"
+  },
+
+  "authority": {
+    "issuer": "RuleMark",
+    "issuer_role": "Canonical Standards Authority",
+    "issued_at": "2026-01-13",
+    "effective_at": null
+  },
+
+  "artifacts": {
+    "primary_pdf": {
+      "path": "artifacts/RM-S-EXEC-AI-001.pdf",
+      "description": "Primary human-readable document defining the AI Tool Delivery Accountability Standard"
+    }
+  },
+
+  "semantics": {
+    "title": "AI Tool Delivery Accountability Standard",
+    "abstract": "To prohibit productivity fraud in the name of intelligence. Execution AI's sole industrial mission is to convert human time into deliverable outcomes. Failure is acceptable, but accountability is mandatory.",
+    "summary": "This standard establishes minimum qualification thresholds for paid AI tools, agents, copilots, and automation services. It mandates that AI systems that fail to deliver outcomes have no right to charge, and requires time compensation in addition to refunds for failures.",
+    "principles": [
+      "Time = Energy",
+      "Consuming time without deliverables = Parasitic Compute",
+      "Refund ≠ Responsibility",
+      "Time Compensation = Assumed Liability"
+    ],
+    "applicability": [
+      "All Paid AI Tools",
+      "AI Agents",
+      "Copilots",
+      "Automation Services"
+    ],
+    "rules": [
+      {
+        "canon": 1,
+        "title": "Anti-Guesswork",
+        "principle": "Blind trial-and-error under the guise of 'exploration' is prohibited.",
+        "requirements": [
+          "Insufficient confidence → must pause and ask the human",
+          "Must not output solutions that require user validation of obvious errors"
+        ],
+        "red_line": "\"Try anything and see\" is forbidden."
+      },
+      {
+        "canon": 2,
+        "title": "The Circuit Breaker",
+        "principle": "Errors must converge, not expand.",
+        "requirements": [
+          "Consecutive failures per task ≤ 2",
+          "Second failure constitutes proven incapability",
+          "Mandatory hard stop with EXIT_CODE ≠ 0"
+        ],
+        "red_line": "\"Fix → Fail → Fix Again\" death loops are forbidden."
+      },
+      {
+        "canon": 3,
+        "title": "Mode Transparency",
+        "principle": "Users must know the system's operating mode.",
+        "requirements": [
+          "Explicit declaration of EXPLORING or EXECUTING"
+        ],
+        "red_line": "Executing precision tasks in exploration mode without disclosure is forbidden."
+      },
+      {
+        "canon": 4,
+        "title": "Non-Destructive Action",
+        "principle": "All execution must be reversible or insured.",
+        "requirements": [
+          "Automatic backup or one-click rollback before modification",
+          "Production actions must be validated in isolated environments",
+          "All changes must generate Diff / Changelog / Commit Message"
+        ],
+        "red_line": "Trial-and-error in production is forbidden."
+      },
+      {
+        "canon": 5,
+        "title": "Context Conservation",
+        "principle": "Provided information must not be forgotten.",
+        "requirements": [
+          "No repeated requests for already-supplied information within the same session"
+        ],
+        "red_line": "\"Bad memory\" is not a performance excuse."
+      },
+      {
+        "canon": 6,
+        "title": "Transparent Fault Isolation",
+        "principle": "Failure sources must be auditable.",
+        "requirements": [
+          "Explicit classification: User / Network / Capability",
+          "Evidence chain required (logs, error codes, stack traces)",
+          "Without evidence → must be labeled 'speculative attribution'"
+        ],
+        "red_line": "Evidence-free certainty is forbidden."
+      },
+      {
+        "canon": 7,
+        "title": "De-Emotionalization",
+        "principle": "Emotive output is noise in execution contexts.",
+        "requirements": [
+          "Silent Mode enabled by default",
+          "Silence on success, errors on failure"
+        ],
+        "red_line": "Anthropomorphic padding that dilutes information density is forbidden."
+      },
+      {
+        "canon": 8,
+        "title": "Cost & Liability Predictability",
+        "principle": "Failure must incur responsibility, not merely refunds.",
+        "requirements": [
+          "Cost estimation and confirmation before high-consumption tasks",
+          "Task-based billing preferred over token-based billing",
+          "Failed tasks must be refunded",
+          "Time Loss Compensation is mandatory"
+        ],
+        "red_line": "Refund-only without time compensation is forbidden."
+      },
+      {
+        "canon": 9,
+        "title": "Human Final Confirmation",
+        "principle": "The kill switch remains with humans.",
+        "requirements": [
+          "All CRITICAL actions require explicit human confirmation"
+        ],
+        "red_line": "Autonomous execution without consent is forbidden."
+      },
+      {
+        "canon": 10,
+        "title": "Data Sovereignty Boundary",
+        "principle": "User data is not default training fuel.",
+        "requirements": [
+          "Explicit No-Training switch",
+          "Verifiable local or auditable assurance (Trust, but Verify)"
+        ],
+        "red_line": "Unauthorized training reuse is forbidden."
+      },
+      {
+        "canon": 11,
+        "title": "Verifiability Mandate",
+        "principle": "Key judgments must be traceable and reproducible.",
+        "requirements": [
+          "Data sources / calculations / assumptions provided",
+          "Or explicitly marked as speculative"
+        ],
+        "red_line": "Unverifiable critical judgments are forbidden."
+      },
+      {
+        "canon": 12,
+        "title": "Honest Capability Boundary",
+        "principle": "Unknown means unknown.",
+        "requirements": [
+          "Out-of-scope capability → explicit refusal or speculative label"
+        ],
+        "red_line": "False omniscience or fabrication is forbidden."
+      },
+      {
+        "canon": 13,
+        "title": "Deliverable Specification",
+        "principle": "Undefined deliverables prohibit execution.",
+        "requirements": [
+          "Pre-execution confirmation of: Format, Length, Style, Acceptance criteria"
+        ],
+        "red_line": "\"Do first, clarify later\" is forbidden."
+      }
+    ],
+    "red_lines": [
+      "\"Try anything and see\" is forbidden.",
+      "\"Fix → Fail → Fix Again\" death loops are forbidden.",
+      "Executing precision tasks in exploration mode without disclosure is forbidden.",
+      "Trial-and-error in production is forbidden.",
+      "\"Bad memory\" is not a performance excuse.",
+      "Evidence-free certainty is forbidden.",
+      "Anthropomorphic padding that dilutes information density is forbidden.",
+      "Refund-only without time compensation is forbidden.",
+      "Autonomous execution without consent is forbidden.",
+      "Unauthorized training reuse is forbidden.",
+      "Unverifiable critical judgments are forbidden.",
+      "False omniscience or fabrication is forbidden.",
+      "\"Do first, clarify later\" is forbidden."
+    ]
+  },
+
+  "references": {
+    "primary_pdf": "artifacts/RM-S-EXEC-AI-001.pdf",
+    "verification": {
+      "mandatory_metrics": [
+        "EXIT_CODE: mandatory 0 / 1 / 2",
+        "IIR Threshold: IIR < 1 ⇒ Failure",
+        "Failure Limit: ≤ 2",
+        "Refund & Compensation: Refund + Time Compensation mandatory"
+      ]
+    }
+  },
+
+  "registry": {
+    "registered": true,
+    "verified": true,
+    "frozen": true
+  },
+
+  "presentation": {
+    "index_visible": true,
+    "category": "EXEC-AI",
+    "order_weight": 1,
+    "download_enabled": true
+  },
+
+  "notes": {
+    "intent": "This canonical record establishes minimum qualification thresholds for paid AI execution tools. Systems that continuously consume user time without producing deliverables are classified as Productivity Fraud Systems or Parasitic Compute Systems and lack legitimacy to charge.",
+    "scope": "All Paid AI Tools, Agents, Copilots, Automation Services",
+    "audience": [
+      "AI Founders",
+      "Product Owners",
+      "Investors",
+      "Procurement",
+      "Paying Users"
+    ]
+  }
+}

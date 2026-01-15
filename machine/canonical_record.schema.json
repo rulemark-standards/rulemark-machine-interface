@@ -4,7 +4,10 @@
   "type": "object",
   "required": ["canonical_id", "version", "hash"],
   "properties": {
-    "canonical_id": { "type": "string" },
+    "canonical_id": {
+      "type": "string",
+      "description": "Canonical identifier of the record, e.g. RM-S-REAL-001"
+    },
     "version": { "type": "string" },
     "hash": { "type": "string" }
   },
