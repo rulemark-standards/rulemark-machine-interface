@@ -1,0 +1,54 @@
+name: RuleMark Integrity Gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify_release.py"
+      - ".github/workflows/integrity-gate.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/verify_release.py"
+      - ".github/workflows/integrity-gate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Machine Interface
+        uses: actions/checkout@v4
+        with:
+          path: rulemark-machine-interface
+
+      - name: Check out Canonical Archive
+        uses: actions/checkout@v4
+        with:
+          repository: rulemark-standards/rulemark-canonical-archive
+          path: rulemark-canonical-archive
+
+      - name: Check out Records
+        uses: actions/checkout@v4
+        with:
+          repository: rulemark-standards/rulemark-records
+          path: rulemark-records
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PDF verifier
+        run: python -m pip install pypdf
+
+      - name: Verify canonical release chain
+        run: |
+          python rulemark-machine-interface/scripts/verify_release.py \
+            --canonical-dir rulemark-canonical-archive \
+            --records-dir rulemark-records \
+            --online
+
