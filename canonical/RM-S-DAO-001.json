@@ -3,8 +3,8 @@
     "canonical_id": "RM-S-DAO-001",
     "type": "Standard",
     "domain": "DAO",
-    "version": "v1.0",
-    "status": "DRAFT"
+    "version": "v1.0-F",
+    "status": "FROZEN"
   },
 
   "authority": {
@@ -22,7 +22,7 @@
   },
 
   "semantics": {
-    "title": "DAO Canonical Governance Standard",
+    "title": "Compliant DAO Framework",
     "abstract": "Defines the canonical governance structure and validation criteria for DAOs under RuleMark.",
     "principles": [
       "Rule Supremacy",
@@ -39,9 +39,9 @@
   },
 
   "registry": {
-    "registered": false,
-    "verified": false,
-    "frozen": false
+    "registered": true,
+    "verified": true,
+    "frozen": true
   },
 
   "presentation": {
@@ -52,6 +52,6 @@
   },
 
   "notes": {
-    "intent": "This canonical record establishes existence and structure. Cryptographic verification and freezing occur in later phases."
+    "intent": "Derived machine representation of the frozen RM-S-DAO-001 canonical record. The normative PDF remains authoritative."
   }
 }

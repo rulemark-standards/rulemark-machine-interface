@@ -191,6 +191,13 @@ def check_online(gate: Gate, standards: list[dict[str, Any]], base_url: str) -> 
             gate.equal(pdf.get("sha256"), standard["sha256"], f"{canonical_id} online machine SHA-256")
             gate.equal(pdf.get("bytes"), standard["bytes"], f"{canonical_id} online machine bytes")
             gate.equal(pdf.get("url"), standard["canonical_file_url"], f"{canonical_id} online machine PDF URL")
+            signature_url = pdf.get("signature_url")
+            if signature_url:
+                signature = fetch_bytes(signature_url).decode("utf-8", errors="replace")
+                if f"sha256:{standard['sha256']}" in signature:
+                    gate.passed(f"{canonical_id} online signature hash")
+                else:
+                    gate.failed(f"{canonical_id} online signature does not match normative artifact")
         except Exception as error:
             gate.failed(f"{canonical_id} online Machine JSON unavailable: {error}")
 
@@ -216,6 +223,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--canonical-dir", type=Path, required=True)
     parser.add_argument("--records-dir", type=Path, required=True)
     parser.add_argument("--web-dir", type=Path)
+    parser.add_argument("--machine-dir", type=Path)
     parser.add_argument("--online", action="store_true")
     parser.add_argument("--base-url", default="https://rulemark.org")
     return parser.parse_args()
@@ -248,6 +256,20 @@ def main() -> int:
         else:
             gate.failed(f"RuleMark Web source registry missing: {web_path}")
 
+    machine_by_id: dict[str, dict[str, Any]] | None = None
+    if args.machine_dir:
+        machine_registry_path = args.machine_dir / "registry" / "standards.json"
+        if machine_registry_path.exists():
+            machine_registry = load_json(machine_registry_path)
+            gate.equal(
+                machine_registry.get("registry_meta", {}).get("authority"),
+                "derived_from_canonical_archive",
+                "Machine Interface registry authority boundary",
+            )
+            machine_by_id = {item["canonical_id"]: item for item in machine_registry["standards"]}
+        else:
+            gate.failed(f"Machine Interface derived registry missing: {machine_registry_path}")
+
     for standard in standards:
         canonical_id = standard["canonical_id"]
         record_path = args.records_dir / standard["record_filename"]
@@ -267,8 +289,21 @@ def main() -> int:
         check_canonical_registry(gate, standard, canonical_by_id)
         if web_source is not None:
             check_web_source(gate, standard, web_source)
+        if args.machine_dir:
+            machine_artifact = args.machine_dir / "artifacts" / f"{canonical_id}.pdf"
+            if machine_artifact.exists():
+                check_pdf(gate, standard, machine_artifact, "Machine Interface artifact")
+            if machine_by_id is not None:
+                mirror = machine_by_id.get(canonical_id)
+                if mirror is None:
+                    gate.failed(f"{canonical_id} absent from Machine Interface derived registry")
+                else:
+                    gate.equal(mirror.get("version"), standard["version"], f"{canonical_id} machine mirror version")
+                    gate.equal(mirror.get("status"), standard["status"], f"{canonical_id} machine mirror status")
 
     gate.equal(set(canonical_by_id), set(ids), "Canonical Archive registry membership")
+    if machine_by_id is not None:
+        gate.equal(set(machine_by_id), set(ids), "Machine Interface mirror membership")
     if args.online:
         check_online(gate, standards, args.base_url.rstrip("/"))
 
@@ -284,4 +319,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

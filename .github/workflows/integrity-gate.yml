@@ -50,5 +50,5 @@ jobs:
           python rulemark-machine-interface/scripts/verify_release.py \
             --canonical-dir rulemark-canonical-archive \
             --records-dir rulemark-records \
+            --machine-dir rulemark-machine-interface \
             --online
-

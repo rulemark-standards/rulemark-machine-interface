@@ -4,6 +4,10 @@ Automation and verification tools for RuleMark canonical records. Machine
 output supports publication, discovery, and verification; it does not replace
 the frozen PDF.
 
+This repository is an automation workspace, not a second canonical archive.
+Its registry files are derived mirrors. Only the Canonical Archive may define
+the registered frozen set.
+
 ## Publishing integrity gate
 
 Read the canonical
@@ -24,6 +28,7 @@ python3 -m pip install pypdf
 python3 scripts/verify_release.py \
   --canonical-dir ../rulemark-canonical-archive \
   --records-dir ../rulemark-records \
+  --machine-dir . \
   --web-dir ../rulemark-web
 ```
 
@@ -33,6 +38,7 @@ Add `--online` after deployment to verify the public site and Records URLs:
 python3 scripts/verify_release.py \
   --canonical-dir ../rulemark-canonical-archive \
   --records-dir ../rulemark-records \
+  --machine-dir . \
   --web-dir ../rulemark-web \
   --online
 ```

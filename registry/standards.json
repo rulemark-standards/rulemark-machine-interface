@@ -1,13 +1,14 @@
 {
   "registry_meta": {
     "schema_version": "1.0",
-    "authority": "sole_source_of_truth"
+    "authority": "derived_from_canonical_archive",
+    "source": "https://github.com/rulemark-standards/rulemark-canonical-archive/blob/main/registry/standards.json",
+    "notice": "This file is an automation mirror and is not an independent source of truth."
   },
   "standards": [
-    {
-      "canonical_id": "RM-S-DAO-001",
-      "status": "DRAFT",
-      "path": "machine/RM-S-DAO-001.json"
-    }
+    { "canonical_id": "RM-S-DAO-001", "status": "FROZEN", "version": "v1.0-F" },
+    { "canonical_id": "RM-S-EXEC-AI-001", "status": "FROZEN", "version": "v1.0-F" },
+    { "canonical_id": "RM-S-DET-AI-001", "status": "FROZEN", "version": "v1.0-F" },
+    { "canonical_id": "RM-S-RWA-001", "status": "FROZEN", "version": "v1.0-F" }
   ]
 }
