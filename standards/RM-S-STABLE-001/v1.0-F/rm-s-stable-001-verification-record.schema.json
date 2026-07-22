@@ -1,0 +1,720 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rulemark.org/schema/rm-s-stable-001/v1.0-F/verification-record.schema.json",
+  "title": "RM-S-STABLE-001 Stablecoin Trust Verification Record",
+  "description": "Machine-readable verification record for the RuleMark RM-S-STABLE-001 Stablecoin Trust Verification Standard. Derived strictly from Section 18 (Machine Interface), with enumerations from Section 13 (status), Section 16 (results) and Section 17 (failure codes), and object field lists from Sections 5, 7, 8, 10, 11, 12 and 13. This schema adds no obligations beyond those defined in the standard; it only constrains the structure of records that claim to conform. Tightened per independent audit finding P0-06.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canonical_id",
+    "standard_id",
+    "standard_version",
+    "record_type",
+    "status",
+    "subject_id",
+    "issued_at",
+    "updated_at",
+    "expires_at",
+    "sha256",
+    "signature",
+    "signer_id",
+    "evidence",
+    "verification_result",
+    "verification_timestamp",
+    "verifier_id",
+    "subject"
+  ],
+  "properties": {
+    "canonical_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "standard_id": {
+      "type": "string",
+      "const": "RM-S-STABLE-001"
+    },
+    "standard_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_type": {
+      "type": "string",
+      "const": "stablecoin_trust_verification"
+    },
+    "status": {
+      "type": "string",
+      "description": "Record lifecycle status (Section 13.4).",
+      "enum": [
+        "ACTIVE",
+        "STALE",
+        "SUSPENDED",
+        "REVERIFICATION_REQUIRED"
+      ]
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issued_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "updated_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "expires_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "sha256": {
+      "$ref": "#/$defs/sha256Hex"
+    },
+    "digest_algorithm": {
+      "type": "string",
+      "description": "Digest algorithm identifier (Section 18.7). Default sha-256.",
+      "default": "sha-256"
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidenceItem"
+      }
+    },
+    "verification_result": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "CONDITIONAL",
+        "DEFICIENT",
+        "FAIL",
+        "NOT_ASSESSED"
+      ]
+    },
+    "verification_timestamp": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "verifier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "$ref": "#/$defs/stablecoinSubject"
+    }
+  },
+  "$defs": {
+    "utcTimestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z$"
+    },
+    "sha256Hex": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "currencyCode": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "decimalString": {
+      "type": "string",
+      "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+    },
+    "monetaryAmount": {
+      "type": "object",
+      "description": "Monetary value; string amount, explicit currency and decimals; floats prohibited (Section 18.3).",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "currency",
+        "decimals"
+      ],
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/decimalString"
+        },
+        "currency": {
+          "$ref": "#/$defs/currencyCode"
+        },
+        "decimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "valuation_time": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "rate_source": {
+          "type": "string"
+        }
+      }
+    },
+    "failureCode": {
+      "type": "string",
+      "enum": [
+        "RMFSTABLE-ID-001",
+        "RMFSTABLE-ID-002",
+        "RMFSTABLE-SUP-001",
+        "RMFSTABLE-SUP-002",
+        "RMFSTABLE-LIA-001",
+        "RMFSTABLE-RES-001",
+        "RMFSTABLE-RES-002",
+        "RMFSTABLE-RES-003",
+        "RMFSTABLE-RES-004",
+        "RMFSTABLE-CUS-001",
+        "RMFSTABLE-CUS-002",
+        "RMFSTABLE-SEG-001",
+        "RMFSTABLE-VAL-001",
+        "RMFSTABLE-RED-001",
+        "RMFSTABLE-RED-002",
+        "RMFSTABLE-ATT-001",
+        "RMFSTABLE-ATT-002",
+        "RMFSTABLE-ATT-003",
+        "RMFSTABLE-SEC-001",
+        "RMFSTABLE-EVT-001",
+        "RMFSTABLE-DAT-001",
+        "RMFSTABLE-EVD-001",
+        "RMFSTABLE-EVD-002",
+        "RMFSTABLE-EVD-003",
+        "RMFSTABLE-SIG-001",
+        "RMFSTABLE-VER-001",
+        "RMFSTABLE-VER-002"
+      ]
+    },
+    "requirementResult": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NOT_APPLICABLE",
+        "NOT_ASSESSED"
+      ]
+    },
+    "evidenceItem": {
+      "type": "object",
+      "description": "Evidence metadata (Section 14.2).",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "evidence_type",
+        "issuer",
+        "source",
+        "issued_at",
+        "sha256",
+        "status"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_type": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "issued_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "effective_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "expires_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256Hex"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "signer_id": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "description": "Per-chain record (Section 5.2).",
+      "additionalProperties": false,
+      "required": [
+        "network",
+        "chain_id",
+        "contract_address",
+        "contract_version"
+      ],
+      "properties": {
+        "network": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "chain_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "contract_address": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "contract_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "issued_amount": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "frozen_amount": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "burn_pending_settlement": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "cross_chain_locked": {
+          "$ref": "#/$defs/monetaryAmount"
+        }
+      }
+    },
+    "reserveAsset": {
+      "type": "object",
+      "description": "Reserve asset line item (Section 7.2).",
+      "additionalProperties": false,
+      "required": [
+        "asset_type",
+        "issuer",
+        "currency",
+        "nominal_value",
+        "book_value",
+        "verified_value",
+        "liquidity_class",
+        "custodian",
+        "account_id",
+        "valuation_source"
+      ],
+      "properties": {
+        "asset_type": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "currency": {
+          "$ref": "#/$defs/currencyCode"
+        },
+        "nominal_value": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "book_value": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "verified_value": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "maturity_date": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "liquidity_class": {
+          "type": "string",
+          "enum": [
+            "same_day",
+            "within_7d",
+            "within_30d",
+            "over_30d",
+            "restricted"
+          ]
+        },
+        "custodian": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "account_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "valuation_source": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "haircut": {
+          "$ref": "#/$defs/decimalString"
+        },
+        "lien": {
+          "type": "boolean"
+        },
+        "pledge": {
+          "type": "boolean"
+        },
+        "related_party": {
+          "type": "boolean"
+        }
+      }
+    },
+    "custodian": {
+      "type": "object",
+      "description": "Custodian disclosure (Section 8.4).",
+      "additionalProperties": false,
+      "required": [
+        "legal_name",
+        "custody_jurisdiction",
+        "account_control"
+      ],
+      "properties": {
+        "legal_name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "regulatory_status": {
+          "type": "string"
+        },
+        "custody_jurisdiction": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "account_structure": {
+          "type": "string"
+        },
+        "account_control": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "transfer_authorization": {
+          "type": "string"
+        },
+        "rehypothecation_allowed": {
+          "type": "boolean"
+        },
+        "commingling_allowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "redemption": {
+      "type": "object",
+      "description": "Redemption terms (Section 10).",
+      "additionalProperties": false,
+      "required": [
+        "direct_redemption_available",
+        "settlement_asset",
+        "max_processing_time"
+      ],
+      "properties": {
+        "direct_redemption_available": {
+          "type": "boolean"
+        },
+        "via_authorized_intermediary": {
+          "type": "boolean"
+        },
+        "minimum_amount": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "fees": {
+          "type": "string"
+        },
+        "settlement_asset": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "max_processing_time": {
+          "type": "string",
+          "description": "Quantified maximum processing time in hours or business days (Section 10.4)."
+        },
+        "suspension_conditions": {
+          "type": "string"
+        },
+        "right_source": {
+          "type": "string"
+        },
+        "judicially_enforceable": {
+          "type": "boolean"
+        },
+        "governing_law": {
+          "type": "string"
+        },
+        "dispute_resolution": {
+          "type": "string"
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "description": "Attestation report (Section 11).",
+      "additionalProperties": false,
+      "required": [
+        "attestor_legal_name",
+        "report_date",
+        "verification_point",
+        "scope"
+      ],
+      "properties": {
+        "attestor_legal_name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "professional_qualification": {
+          "type": "string"
+        },
+        "signatory": {
+          "type": "string"
+        },
+        "report_date": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "verification_point": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "string"
+        },
+        "exceptions": {
+          "type": "string"
+        }
+      }
+    },
+    "contractPermission": {
+      "type": "object",
+      "description": "Contract permission / privileged role (Section 12).",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "control_mechanism"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "e.g. mint, burn, freeze, unfreeze, pause, upgrade, change_implementation, migrate, change_fee, change_admin, change_oracle."
+        },
+        "holder": {
+          "type": "string"
+        },
+        "control_mechanism": {
+          "type": "string",
+          "description": "e.g. multisig, threshold_sig, timelock, governance, hsm, or functional equivalent (Section 12.2)."
+        },
+        "on_chain_verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "materialEvent": {
+      "type": "object",
+      "description": "Material event notice (Section 13.3).",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "event_type",
+        "detected_at",
+        "published_at",
+        "current_status",
+        "requires_reverification"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "event_type": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "detected_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "published_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "affected_subject": {
+          "type": "string"
+        },
+        "affected_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "current_status": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requires_reverification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "requirementEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "result"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "result": {
+          "$ref": "#/$defs/requirementResult"
+        },
+        "failure_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/failureCode"
+          }
+        }
+      }
+    },
+    "stablecoinSubject": {
+      "type": "object",
+      "description": "Stablecoin fields (Section 18.2).",
+      "additionalProperties": false,
+      "required": [
+        "issuer",
+        "token",
+        "networks",
+        "reference_currency",
+        "verification_point",
+        "total_supply",
+        "circulating_supply",
+        "outstanding_liabilities",
+        "eligible_reserve_value",
+        "reserve_coverage_ratio"
+      ],
+      "properties": {
+        "issuer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "issuer_legal_name",
+            "issuer_identifier"
+          ],
+          "properties": {
+            "issuer_legal_name": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "issuer_identifier": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "registration_jurisdiction": {
+              "type": "string"
+            },
+            "registered_address": {
+              "type": "string"
+            },
+            "official_website": {
+              "type": "string",
+              "format": "uri"
+            },
+            "machine_interface": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "token": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "token_name",
+            "token_symbol"
+          ],
+          "properties": {
+            "token_name": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "token_symbol": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "networks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/network"
+          }
+        },
+        "reference_currency": {
+          "$ref": "#/$defs/currencyCode"
+        },
+        "verification_point": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "total_supply": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "circulating_supply": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "outstanding_liabilities": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "eligible_reserve_value": {
+          "$ref": "#/$defs/monetaryAmount"
+        },
+        "reserve_coverage_ratio": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?$",
+          "description": "Decimal string. PASS requires >= 1.0 (Sections 7.1, 9.5, 16.1)."
+        },
+        "reserve_assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reserveAsset"
+          }
+        },
+        "custodians": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/custodian"
+          }
+        },
+        "redemption": {
+          "$ref": "#/$defs/redemption"
+        },
+        "attestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attestation"
+          }
+        },
+        "contract_permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contractPermission"
+          }
+        },
+        "material_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/materialEvent"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requirementEntry"
+          }
+        },
+        "failure_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/failureCode"
+          }
+        }
+      }
+    }
+  }
+}

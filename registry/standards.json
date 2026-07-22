@@ -9,6 +9,7 @@
     { "canonical_id": "RM-S-DAO-001", "status": "FROZEN", "version": "v1.0-F" },
     { "canonical_id": "RM-S-EXEC-AI-001", "status": "FROZEN", "version": "v1.0-F" },
     { "canonical_id": "RM-S-DET-AI-001", "status": "FROZEN", "version": "v1.0-F" },
-    { "canonical_id": "RM-S-RWA-001", "status": "FROZEN", "version": "v1.0-F" }
+    { "canonical_id": "RM-S-RWA-001", "status": "FROZEN", "version": "v1.0-F" },
+    { "canonical_id": "RM-S-STABLE-001", "status": "FROZEN", "version": "v1.0-F" }
   ]
 }

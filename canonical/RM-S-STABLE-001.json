@@ -1,0 +1,34 @@
+{
+  "identity": {
+    "canonical_id": "RM-S-STABLE-001",
+    "type": "Standard",
+    "domain": "Stablecoin Trust Verification",
+    "version": "v1.0-F",
+    "status": "FROZEN"
+  },
+  "authority": {
+    "issuer": "RuleMark",
+    "issuer_role": "Canonical Standards Authority",
+    "issued_at": "2026-07-22",
+    "effective_at": "2026-07-22"
+  },
+  "artifacts": {
+    "primary_pdf": {
+      "path": "artifacts/RM-S-STABLE-001.pdf",
+      "url": "https://records.rulemark.org/RM-S-STABLE-001.pdf",
+      "sha256": "c92495c65e45ed986ff8fc3b9c6613220969481dbd958909e5e8c7a1ecacd3c1",
+      "bytes": 66869,
+      "pages": 25,
+      "description": "Frozen normative artifact"
+    }
+  },
+  "semantics": {
+    "title": "Stablecoin Trust Verification Standard",
+    "summary": "Defines deterministic, machine-verifiable requirements for the trust basis of fiat-referenced, reserve-backed stablecoins, covering supply, liabilities, reserves, custody, redemption, and independent attestation. It determines whether a stablecoin satisfies those requirements at a specified verification point. It does not predict market price, does not guarantee against de-pegging, and does not certify legal compliance in any jurisdiction.",
+    "applicability": ["Fiat-referenced, reserve-backed stablecoins that promise redemption"],
+    "determinations": ["PASS", "CONDITIONAL", "DEFICIENT", "FAIL", "NOT ASSESSED"]
+  },
+  "registry": { "registered": true, "verified": true, "frozen": true },
+  "presentation": { "index_visible": true, "category": "Stablecoin", "order_weight": 5, "download_enabled": true },
+  "notes": { "intent": "Derived machine representation. The frozen PDF remains the sole Normative Artifact." }
+}
