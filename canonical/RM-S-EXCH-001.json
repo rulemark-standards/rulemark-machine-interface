@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "canonical_id": "RM-S-EXCH-001",
+    "type": "Standard",
+    "domain": "Exchange Transparency",
+    "version": "v1.0-F",
+    "status": "FROZEN"
+  },
+  "authority": {
+    "issuer": "RuleMark",
+    "issuer_role": "Canonical Standards Authority",
+    "issued_at": "2026-07-23",
+    "effective_at": "2026-07-23"
+  },
+  "artifacts": {
+    "primary_pdf": {
+      "path": "artifacts/RM-S-EXCH-001.pdf",
+      "url": "https://records.rulemark.org/RM-S-EXCH-001.pdf",
+      "sha256": "2f40fe890881956c0d9ecafc2d4fff728eb2190b835b37b43100f8e63fea5999",
+      "bytes": 75233,
+      "pages": 26,
+      "description": "Frozen normative artifact"
+    }
+  },
+  "semantics": {
+    "title": "Exchange Transparency Verification Standard",
+    "summary": "Defines deterministic, machine-verifiable requirements for the transparency of custodial digital asset trading platforms, covering the complete set of entities holding customer assets, cryptographic proof of control over reserve addresses, customer-verifiable liabilities, and per-asset reserve coverage. It determines whether a platform satisfies those requirements at a single specified verification point, and does not describe a continuing state. It does not guarantee future solvency, going concern, or the safety of customer assets, does not assess listed assets or market conduct, and does not certify the validity of any licence.",
+    "determinations": ["PASS", "CONDITIONAL", "DEFICIENT", "FAIL", "NOT ASSESSED"]
+  },
+  "registry": { "registered": true, "verified": true, "frozen": true },
+  "presentation": { "index_visible": true, "category": "Exchange", "order_weight": 7, "download_enabled": true },
+  "notes": { "intent": "Derived machine representation. The frozen PDF remains the sole Normative Artifact." }
+}
