@@ -1,0 +1,34 @@
+{
+  "identity": {
+    "canonical_id": "RM-S-PAY-001",
+    "type": "Standard",
+    "domain": "Digital Payment Verification",
+    "version": "v1.0-F",
+    "status": "FROZEN"
+  },
+  "authority": {
+    "issuer": "RuleMark",
+    "issuer_role": "Canonical Standards Authority",
+    "issued_at": "2026-07-23",
+    "effective_at": "2026-07-23"
+  },
+  "artifacts": {
+    "primary_pdf": {
+      "path": "artifacts/RM-S-PAY-001.pdf",
+      "url": "https://records.rulemark.org/RM-S-PAY-001.pdf",
+      "sha256": "b427f7b6b85bdbaa83a3302cd567c03b3406b86430c4f3926c05468074e8d706",
+      "bytes": 80316,
+      "pages": 27,
+      "description": "Frozen normative artifact"
+    }
+  },
+  "semantics": {
+    "title": "Digital Payment Verification Standard",
+    "summary": "Defines deterministic, machine-verifiable requirements for the authenticity, completeness, and re-computability of digital payment records, from authorization through settlement and finality.",
+    "scope_note": "Determines whether a digital payment record is authentic, complete, internally consistent, and re-computable at a specified verification time. It does not certify KYC, AML, sanctions, tax compliance, source-of-funds lawfulness, or dispute liability.",
+    "determinations": ["PASS", "CONDITIONAL", "DEFICIENT", "FAIL", "NOT ASSESSED"]
+  },
+  "registry": { "registered": true, "verified": true, "frozen": true },
+  "presentation": { "index_visible": true, "category": "Digital Payment", "order_weight": 6, "download_enabled": true },
+  "notes": { "intent": "Derived machine representation. The frozen PDF remains the sole Normative Artifact." }
+}
