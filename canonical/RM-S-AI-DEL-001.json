@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "canonical_id": "RM-S-AI-DEL-001",
+    "type": "Standard",
+    "domain": "AI Agent Delegated Authority",
+    "version": "v1.0-F",
+    "status": "FROZEN"
+  },
+  "authority": {
+    "issuer": "RuleMark",
+    "issuer_role": "Canonical Standards Authority",
+    "issued_at": "2026-07-23",
+    "effective_at": "2026-07-23"
+  },
+  "artifacts": {
+    "primary_pdf": {
+      "path": "artifacts/RM-S-AI-DEL-001.pdf",
+      "url": "https://records.rulemark.org/RM-S-AI-DEL-001.pdf",
+      "sha256": "4c65b64eb9cb36f33b13929182bbed84f0459c809f0b7587ce57206b97545537",
+      "bytes": 82191,
+      "pages": 28,
+      "description": "Frozen normative artifact"
+    }
+  },
+  "semantics": {
+    "title": "AI Agent Delegated Authority Verification Standard",
+    "summary": "Defines deterministic, machine-verifiable requirements for the authority under which an AI agent acts on behalf of a principal, covering the signed authorization credential and its binding to a specific agent instance and configuration, the expression of scope in machine-testable form, human checkpoints, revocation, sub-delegation, and a tamper-evident action log reconciled against counterparty records. It determines whether the recorded actions stayed within the granted authority during a specified assessment window, and does not state anything about future agent behaviour. It does not evaluate the agent's capability, output quality, or decision correctness, does not certify the safety or alignment of the underlying model, and does not allocate liability.",
+    "determinations": ["PASS", "CONDITIONAL", "DEFICIENT", "FAIL", "NOT ASSESSED"]
+  },
+  "registry": { "registered": true, "verified": true, "frozen": true },
+  "presentation": { "index_visible": true, "category": "AI Delegated Authority", "order_weight": 8, "download_enabled": true },
+  "notes": { "intent": "Derived machine representation. The frozen PDF remains the sole Normative Artifact." }
+}
